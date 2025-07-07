@@ -1,0 +1,18 @@
+spring.application.name: camunda8-warehouse
+
+camunda:
+  client:
+    mode: self-managed
+    zeebe:
+      enabled: true
+      grpc-address: http://127.0.0.1:26500
+      rest-address: http://127.0.0.1:8081
+
+logging:
+  level:
+    io:
+      camunda:
+        zeebe:
+          client:
+            impl:
+              ZeebeCallCredentials: ERROR

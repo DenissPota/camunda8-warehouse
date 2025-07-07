@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_181t8xm" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.36.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.7.0">
+  <bpmn:process id="process-orders" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Order request received">
+      <bpmn:outgoing>Flow_1gdv64k</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_0ljuca5" name="Order processed">
+      <bpmn:incoming>Flow_0xhhpbx</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="process-order" name="Process order">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="process-order" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1a4z5pr</bpmn:incoming>
+      <bpmn:outgoing>Flow_1piylr8</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0xhhpbx" sourceRef="send-invoice" targetRef="Event_0ljuca5" />
+    <bpmn:serviceTask id="send-invoice" name="Send invoice">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="send-invoice" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1piylr8</bpmn:incoming>
+      <bpmn:outgoing>Flow_0xhhpbx</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_1uitjne" name="Acknowledge order">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1gdv64k</bpmn:incoming>
+      <bpmn:outgoing>Flow_1a4z5pr</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1gdv64k" sourceRef="StartEvent_1" targetRef="Activity_1uitjne" />
+    <bpmn:sequenceFlow id="Flow_1a4z5pr" sourceRef="Activity_1uitjne" targetRef="process-order" />
+    <bpmn:sequenceFlow id="Flow_1piylr8" sourceRef="process-order" targetRef="send-invoice" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="process-orders">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="182" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="166" y="145" width="69" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1o81xzf_di" bpmnElement="process-order">
+        <dc:Bounds x="470" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_09n0jsd_di" bpmnElement="Activity_1uitjne">
+        <dc:Bounds x="300" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1wrc5oe_di" bpmnElement="send-invoice">
+        <dc:Bounds x="640" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ljuca5_di" bpmnElement="Event_0ljuca5">
+        <dc:Bounds x="822" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="800" y="145" width="82" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0xhhpbx_di" bpmnElement="Flow_0xhhpbx">
+        <di:waypoint x="740" y="120" />
+        <di:waypoint x="822" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1gdv64k_di" bpmnElement="Flow_1gdv64k">
+        <di:waypoint x="218" y="120" />
+        <di:waypoint x="300" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1a4z5pr_di" bpmnElement="Flow_1a4z5pr">
+        <di:waypoint x="400" y="120" />
+        <di:waypoint x="470" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1piylr8_di" bpmnElement="Flow_1piylr8">
+        <di:waypoint x="570" y="120" />
+        <di:waypoint x="640" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

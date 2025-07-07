@@ -1,0 +1,69 @@
+openapi: 3.1.1
+info:
+  title: Warehouse api services
+  description: |-
+    This is a sample warehouse api
+  version: 1.0.0
+servers:
+  - url: http://locahost/warehouse
+tags:
+  - name: order
+    description: Everything about orders
+security:
+  - bearerAuth: []
+paths:
+  /order:
+    post:
+      tags:
+        - order
+      summary: Place an order for an item.
+      description: Place a new order in the warehouse.
+      operationId: placeOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderPost'
+      responses:
+        200:
+          description: Order placed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    OrderPost:
+      type: object
+      properties:
+        name:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+          example: 7
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: bb3d52be-645c-42cd-ac37-cebab95fdd8c
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
