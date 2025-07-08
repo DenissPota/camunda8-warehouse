@@ -29,7 +29,7 @@ public class Camunda8WarehouseApplication implements CommandLineRunner {
         var event = zeebeClient.newCreateInstanceCommand()
             .bpmnProcessId(bpmnProcessId)
             .latestVersion()
-            .variables(Map.of("order", OrderPost.builder().name("Nvidia RTX 3090").quantity(7).build()))
+            .variables(Map.of("order", OrderPost.builder().name("Nvidia RTX 3090").quantity(400).build()))
             .send()
             .join();
         log.info("Started a process instance: {}", event.getProcessInstanceKey());
