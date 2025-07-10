@@ -25,7 +25,7 @@ public class ProcessOrdersWorker {
 
     private final PaymentService paymentService;
 
-    @JobWorker(type = "process-payment", timeout = 30000, maxJobsActive = 5, autoComplete = false)
+    @JobWorker(type = "process-payment", timeout = 30000, maxJobsActive = 1, autoComplete = false)
     public void processPayment(@Variable OrderPost order, ActivatedJob job, JobClient client) {
         try {
             log.debug("Activated job: {}", job);

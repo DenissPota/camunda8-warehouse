@@ -25,13 +25,13 @@ public class Camunda8WarehouseApplication implements CommandLineRunner {
 
     @Override
     public void run(final String... args) {
-        var bpmnProcessId = "process-orders";
-        var event = zeebeClient.newCreateInstanceCommand()
-            .bpmnProcessId(bpmnProcessId)
-            .latestVersion()
-            .variables(Map.of("order", OrderPost.builder().name("Nvidia RTX 3090").quantity(400).build()))
-            .send()
-            .join();
-        log.info("Started a process instance: {}", event.getProcessInstanceKey());
+//        var bpmnProcessId = "process-orders";
+//        var event = zeebeClient.newCreateInstanceCommand()
+//            .bpmnProcessId(bpmnProcessId)
+//            .latestVersion()
+//            .variables(Map.of("order", OrderPost.builder().name("Nvidia RTX 3090").quantity(100).build()))
+//            .send()
+//            .join();
+//        log.info("Started a process instance: {}", event.getProcessInstanceKey());
     }
 }
