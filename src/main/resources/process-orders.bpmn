@@ -55,14 +55,14 @@
       <bpmn:incoming>Flow_1uow7wl</bpmn:incoming>
       <bpmn:outgoing>Flow_06v6n1w</bpmn:outgoing>
     </bpmn:parallelGateway>
-    <bpmn:boundaryEvent id="validation-exception" attachedToRef="process-payment">
+    <bpmn:boundaryEvent id="validation-exception" name="Payment failed" attachedToRef="process-payment">
       <bpmn:outgoing>Flow_03cjq1h</bpmn:outgoing>
       <bpmn:errorEventDefinition id="ErrorEventDefinition_01q7l35" errorRef="Error_181e3o0" />
     </bpmn:boundaryEvent>
     <bpmn:endEvent id="Event_0h0wjh4" name="Order cancelled">
       <bpmn:incoming>Flow_0yzx1sk</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_03cjq1h" name="Payment failed" sourceRef="validation-exception" targetRef="inform-customer" />
+    <bpmn:sequenceFlow id="Flow_03cjq1h" sourceRef="validation-exception" targetRef="inform-customer" />
     <bpmn:sequenceFlow id="Flow_0yzx1sk" sourceRef="inform-customer" targetRef="Event_0h0wjh4" />
     <bpmn:serviceTask id="inform-customer" name="Inform customer">
       <bpmn:extensionElements>
@@ -115,6 +115,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_10skdyu_di" bpmnElement="validation-exception">
         <dc:Bounds x="442" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="463" y="285" width="73" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1gdv64k_di" bpmnElement="Flow_1gdv64k">
         <di:waypoint x="228" y="220" />
