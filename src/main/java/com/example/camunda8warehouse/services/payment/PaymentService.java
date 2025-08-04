@@ -17,7 +17,7 @@ public class PaymentService {
     public UUID processPayment(OrderPost order) {
         UUID refId = UUID.randomUUID();
 
-        Thread.sleep(Duration.ofSeconds(5).toMillis());
+        Thread.sleep(Duration.ofSeconds(5).toMillis()); // Validate
         if (order.getQuantity() == 400) { // Some random input to simulate Retryable exception.
             String msg = "Payment service is not responding!";
             log.warn(msg);
